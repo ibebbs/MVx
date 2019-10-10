@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
@@ -21,7 +22,20 @@ namespace Crux
                 .Subscribe(value => notifyPropertyChanged(propertyName));
         }
 
+        public Property(TValue defaultValue, string propertyName, Action<PropertyChangedEventArgs> notifyPropertyChanged)
+        {
+            _current = defaultValue;
+            _values = new BehaviorSubject<TValue>(defaultValue);
+
+            _notifySubscription = _values
+                .DistinctUntilChanged()
+                .Do(value => _current = value)
+                .Subscribe(value => notifyPropertyChanged(new PropertyChangedEventArgs(propertyName)));
+        }
+
         public Property(string propertyName, Action<string> notifyPropertyChanged) : this(default, propertyName, notifyPropertyChanged) { }
+
+        public Property(string propertyName, Action<PropertyChangedEventArgs> notifyPropertyChanged) : this(default, propertyName, notifyPropertyChanged) { }
 
         IDisposable IObservable<TValue>.Subscribe(IObserver<TValue> observer)
         {

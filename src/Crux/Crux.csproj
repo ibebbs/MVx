@@ -11,6 +11,7 @@ A (mostly) unopinionated, light-weight alternative to ReactiveUI provided as a l
     <PackageProjectUrl>https://github.com/ibebbs/Crux</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ibebbs/Crux</RepositoryUrl>
     <PackageTags>wpf uwp xaml reactive rx</PackageTags>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
