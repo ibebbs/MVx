@@ -7,6 +7,10 @@
     <Description>Composable Reactive User-interface eXtensions
 
 A (mostly) unopinionated, light-weight alternative to ReactiveUI provided as a library _not a framework_.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/ibebbs/Crux</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ibebbs/Crux</RepositoryUrl>
+    <PackageTags>wpf uwp xaml reactive rx</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
