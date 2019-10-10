@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.1-alpha1</Version>
+    <Version>1.0.2-alpha1</Version>
     <Authors>Ian Bebbington</Authors>
     <Description>Composable Reactive User-interface eXtensions
 

@@ -11,10 +11,13 @@ namespace Crux
 
         public event EventHandler CanExecuteChanged;
 
-        public Command()
+        public Command(bool canExecute)
         {
             _invocations = new Subject<object>();
+            _canExecute = canExecute;
         }
+
+        public Command() : this(false) { }
 
         IDisposable IObservable<object>.Subscribe(IObserver<object> observer)
         {
