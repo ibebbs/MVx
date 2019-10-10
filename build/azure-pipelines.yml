@@ -16,8 +16,8 @@ variables:
   version: 1.0.1
 
 steps:
-- script: dotnet restore
-- script: dotnet build
+- script: dotnet restore src/
+- script: dotnet build src/
 # should now be done by build due to project setting 
 # - script: dotnet pack /p:PackageVersion=$(version)
 - task: NuGetCommand@2
