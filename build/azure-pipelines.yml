@@ -40,7 +40,6 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    packagesToPush: '$(Build.Repository.LocalPath)/**/*.nupkg;!$(Build.Repository.LocalPath)/**/*.symbols.nupkg'
     publishFeedCredentials: 'MyGet Bebbs Feed'
     verbosityPush: detailed
 
