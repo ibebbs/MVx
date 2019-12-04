@@ -8,14 +8,22 @@
 
 A (mostly) unopinionated, light-weight alternative to ReactiveUI provided as a library _not a framework_.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/ibebbs/Crux</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ibebbs/Crux</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ibebbs/MVx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ibebbs/MVx</RepositoryUrl>
     <PackageTags>wpf uwp xaml reactive rx</PackageTags>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Reactive" Version="4.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
