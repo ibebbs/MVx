@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
-namespace Crux
+namespace MVx.Observable
 {
     public class Property<TValue> : IObservable<TValue>, IObserver<TValue>, IDisposable
     {

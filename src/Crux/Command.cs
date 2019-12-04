@@ -2,7 +2,7 @@
 using System.Reactive.Subjects;
 using System.Windows.Input;
 
-namespace Crux
+namespace MVx.Observable
 {
     public class Command : ICommand, IObservable<object>, IObserver<bool>, IDisposable
     {
