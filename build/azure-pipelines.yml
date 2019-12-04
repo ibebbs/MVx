@@ -37,9 +37,18 @@ steps:
   displayName: 'Pack MVx.Observable'
 
 - task: NuGetCommand@2
+  displayName: 'Push to Myget'
   inputs:
     command: push
     nuGetFeedType: external
     publishFeedCredentials: 'MyGet Bebbs Feed'
     verbosityPush: detailed
 
+- task: NuGetCommand@2
+  displayName: 'Push to Nuget'
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'Nuget'
+    verbosityPush: detailed
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
