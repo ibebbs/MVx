@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{DA534FF4-F63D-4C64-B5C6-8B029EF10ABF}"
 	ProjectSection(SolutionItems) = preProject
 		..\build\azure-pipelines.yml = ..\build\azure-pipelines.yml
+		..\GitVersion.yml = ..\GitVersion.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVx.Observable", "MVx.Observable\MVx.Observable.csproj", "{F653ECED-3601-41A4-A541-B41E29BE3487}"
