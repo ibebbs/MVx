@@ -22,14 +22,26 @@ namespace Crux
             _subject = new Subject<object>();
         }
 
-        public void Dispose()
+        private void Dispose(bool isDisposing)
         {
             if (_subject != null)
             {
                 _subject.Dispose();
                 _subject = null;
             }
+
+            if (isDisposing)
+            {
+                GC.SuppressFinalize(this);
+            }
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        ~Bus() => Dispose(false);
 
         public IObservable<TEvent> GetEvent<TEvent>()
         {

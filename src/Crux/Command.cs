@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Crux
 {
-    public class Command : ICommand, IObservable<object>, IObserver<bool>
+    public class Command : ICommand, IObservable<object>, IObserver<bool>, IDisposable
     {
         private Subject<object> _invocations;
         private bool _canExecute;
@@ -19,6 +19,27 @@ namespace Crux
 
         public Command() : this(false) { }
 
+        private void Dispose(bool isDisposing)
+        {
+            if (_invocations != null)
+            {
+                _invocations.Dispose();
+                _invocations = null;
+            }
+
+            if (isDisposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        ~Command() => Dispose(false);
+
         IDisposable IObservable<object>.Subscribe(IObserver<object> observer)
         {
             return _invocations.Subscribe(observer);
@@ -28,20 +49,17 @@ namespace Crux
         {
             _canExecute = canExecute;
 
-            if (CanExecuteChanged != null)
-            {
-                CanExecuteChanged(this, EventArgs.Empty);
-            }
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         void IObserver<bool>.OnCompleted()
         {
-            throw new NotImplementedException();
+            // Do nothing
         }
 
         void IObserver<bool>.OnError(Exception error)
         {
-            throw new NotImplementedException();
+            // Do nothing
         }
 
         void IObserver<bool>.OnNext(bool value)

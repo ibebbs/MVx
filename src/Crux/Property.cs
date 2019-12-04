@@ -5,11 +5,11 @@ using System.Reactive.Subjects;
 
 namespace Crux
 {
-    public class Property<TValue> : IObservable<TValue>, IObserver<TValue>
+    public class Property<TValue> : IObservable<TValue>, IObserver<TValue>, IDisposable
     {
-        private TValue _current;
         private BehaviorSubject<TValue> _values;
         private IDisposable _notifySubscription;
+        private TValue _current;
 
         public Property(TValue defaultValue, string propertyName, Action<string> notifyPropertyChanged)
         {
@@ -32,6 +32,33 @@ namespace Crux
                 .Do(value => _current = value)
                 .Subscribe(value => notifyPropertyChanged(new PropertyChangedEventArgs(propertyName)));
         }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (_notifySubscription != null)
+            {
+                _notifySubscription.Dispose();
+                _notifySubscription = null;
+            }
+
+            if (_values != null)
+            {
+                _values.Dispose();
+                _values = null;
+            }
+
+            if (isDisposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        ~Property() => Dispose(false);
 
         public Property(string propertyName, Action<string> notifyPropertyChanged) : this(default, propertyName, notifyPropertyChanged) { }
 
