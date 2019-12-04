@@ -32,7 +32,7 @@ steps:
   displayName: 'Restore Solution'
 - script: dotnet build src/
   displayName: 'Build Solution'
-- script: dotnet pack src/MVx.Observable/MVx.Observable.csproj -no-build -o '$(Build.ArtifactStagingDirectory)' /p:Version='$(GitVersion.NuGetVersionV2)'
+- script: dotnet pack src/MVx.Observable/MVx.Observable.csproj --no-build -o '$(Build.ArtifactStagingDirectory)' /p:Version='$(GitVersion.NuGetVersionV2)'
   displayName: 'Pack MVx.Observable'
 
 - task: NuGetCommand@2
