@@ -16,10 +16,25 @@ variables:
   version: 1.0.1
 
 steps:
+- task: GitVersion@5
+  displayName: 'GitVersion'
+  inputs:
+    updateAssemblyInfo: true
+    writeVersionInfoToBuildLog: true
+    
+- script: echo %Action%%BuildVersion%
+  displayName: 'Set build version'
+  env:
+    Action: '##vso[build.updatebuildnumber]'
+    BuildVersion: $(GitVersion.SemVer)
+
 - script: dotnet restore src/
+  displayName: 'Restore Solution'
 - script: dotnet build src/
-# should now be done by build due to project setting 
-# - script: dotnet pack /p:PackageVersion=$(version)
+  displayName: 'Build Solution'
+- script: dotnet pack src/MVx.Observable/MVx.Observable.csproj -no-build -o '$(Build.ArtifactStagingDirectory)' /p:Version='$(GitVersion.NuGetVersionV2)'
+  displayName: 'Pack MVx.Observable'
+
 - task: NuGetCommand@2
   inputs:
     command: push

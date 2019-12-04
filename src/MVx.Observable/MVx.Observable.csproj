@@ -7,7 +7,7 @@
     <Description>Functional, Declarative and Reactive Extensions for MVVM &amp; MVC patterns
 
 A (mostly) unopinionated, light-weight alternative to ReactiveUI provided as a library _not a framework_.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/ibebbs/Crux</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ibebbs/Crux</RepositoryUrl>
     <PackageTags>wpf uwp xaml reactive rx</PackageTags>
