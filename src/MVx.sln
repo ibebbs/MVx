@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{DA534FF4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVx.Observable", "MVx.Observable\MVx.Observable.csproj", "{F653ECED-3601-41A4-A541-B41E29BE3487}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVx.Monads", "MVx.Monads\MVx.Monads.csproj", "{7BDD4684-5861-406E-B0AA-97F55EE0C0EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F653ECED-3601-41A4-A541-B41E29BE3487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F653ECED-3601-41A4-A541-B41E29BE3487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F653ECED-3601-41A4-A541-B41E29BE3487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDD4684-5861-406E-B0AA-97F55EE0C0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDD4684-5861-406E-B0AA-97F55EE0C0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDD4684-5861-406E-B0AA-97F55EE0C0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDD4684-5861-406E-B0AA-97F55EE0C0EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
