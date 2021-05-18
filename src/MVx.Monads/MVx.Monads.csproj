@@ -2,6 +2,19 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <Authors>Ian Bebbington</Authors>
+    <Company>Ian BebbingtonIan Bebbington</Company>
+    <Description>Simple collection of Monads (Option, Fallible &amp; Invalidatable)</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/ibebbs/MVx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ibebbs/MVx</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
