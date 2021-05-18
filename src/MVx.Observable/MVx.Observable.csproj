@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <Version>1.0.2-alpha1</Version>
     <Authors>Ian Bebbington</Authors>
     <Description>Functional, Declarative and Reactive Extensions for MVVM &amp; MVC patterns
@@ -16,7 +16,7 @@ A (mostly) unopinionated, light-weight alternative to ReactiveUI provided as a l
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reactive" Version="4.1.6" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
