@@ -53,3 +53,31 @@ jobs:
     - name: Publish
       if: startsWith(github.ref, 'refs/heads/release')
       run: nuget push "nupkg/*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+
+
+  build-views:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.203
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+      with:
+        nuget-version: latest
+
+    - name: Install Views.Wpf dependencies
+      run: dotnet restore ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj
+    - name: Build Views.Wpf
+      run: dotnet build ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj --configuration Release --no-restore
+    - name: Pack Views.Wpf
+      run: dotnet pack ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj -p:PackageVersion=5.0.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
+
+    - name: Push to GitHub Packages
+      run: nuget push "nupkg/*.nupkg" -Source "https://nuget.pkg.github.com/ibebbs/index.json" -ApiKey ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish
+      if: startsWith(github.ref, 'refs/heads/release')
+      run: nuget push "nupkg/*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
