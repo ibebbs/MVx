@@ -14,7 +14,7 @@ namespace MVx.Views
             {
                 var view = ViewLocator.Instance.LocateForModel(e.NewValue, target);
 
-                view.DataContext = e.NewValue;
+                ViewBinder.Bind(view, e.NewValue);
 
                 SetContentProperty(target, view);
             }
