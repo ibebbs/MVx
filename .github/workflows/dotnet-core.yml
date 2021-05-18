@@ -39,13 +39,6 @@ jobs:
       run: dotnet build ./src/MVx.Monads/MVx.Monads.csproj --configuration Release --no-restore
     - name: Pack Monad
       run: dotnet pack ./src/MVx.Monads/MVx.Monads.csproj -p:PackageVersion=5.0.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
-      
-    - name: Install Views.Wpf dependencies
-      run: dotnet restore ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj
-    - name: Build Views.Wpf
-      run: dotnet build ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj --configuration Release --no-restore
-    - name: Pack Views.Wpf
-      run: dotnet pack ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj -p:PackageVersion=5.0.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
 
     - name: Push to GitHub Packages
       run: nuget push "nupkg/*.nupkg" -Source "https://nuget.pkg.github.com/ibebbs/index.json" -ApiKey ${{ secrets.GITHUB_TOKEN }}
