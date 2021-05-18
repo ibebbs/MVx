@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-    <Version>1.0.2-alpha1</Version>
+    <Version>1.0.2</Version>
     <Authors>Ian Bebbington</Authors>
     <Description>Functional, Declarative and Reactive Extensions for MVVM &amp; MVC patterns
 
