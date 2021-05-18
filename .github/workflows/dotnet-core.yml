@@ -67,13 +67,14 @@ jobs:
       run: dotnet build ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj --configuration Release --no-restore
     - name: Pack Views.Wpf
       run: dotnet pack ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj -p:PackageVersion=5.0.$Env:GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
-            
-      
-    - name: Add private GitHub registry to NuGet
-      run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/ibebbs/index.json -Username ibebbs -Password ${{ secrets.GITHUB_TOKEN }}
-    - name: Push to GitHub Packages
-      run: nuget push ".\nupkg\*.nupkg" -Source "GPR"
 
-    - name: Publish
+    - name: Push to GitHub Packages
+      run: |
+        nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/ibebbs/index.json -Username ibebbs -Password ${{ secrets.GITHUB_TOKEN }}
+        nuget push ".\nupkg\*.nupkg" -Source "GPR"
+
+    - name: Publish to Nuget
       if: startsWith(github.ref, 'refs/heads/release')
-      run: nuget push ".\nupkg\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: |
+        nuget sources add -name "nuget" -Source https://api.nuget.org/v3/index.json -Username ibebbs -Password ${{ secrets.NUGET_API_KEY }}
+        nuget push ".\nupkg\*.nupkg" -Source "nuget"

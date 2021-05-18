@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MVx.Views.Wpf
+namespace MVx.Views
 {
     public static class View
     {

@@ -8,6 +8,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ibebbs/MVx</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ibebbs/MVx</RepositoryUrl>
+    <RootNamespace>MVx.Views</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

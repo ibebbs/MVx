@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MVx.Views.Wpf
+namespace MVx.Views
 {
     /// <summary>
     /// Represents a component that can locate the view for a given model
@@ -30,6 +33,25 @@ namespace MVx.Views.Wpf
     {
         public static IViewLocator Instance { get; set; } = new ViewLocator();
 
+        private Dictionary<string, Type> _resolvedTypes = new Dictionary<string, Type>();
+
+        private Type ResolveViewType(string typeName)
+        {
+            if (!_resolvedTypes.TryGetValue(typeName, out var viewType))
+            {
+                viewType = AppDomain.CurrentDomain.GetAssemblies()
+                    .Select(assembly => assembly.GetType(typeName, false))
+                    .Where(type => type is not null)
+                    .FirstOrDefault();
+
+                if (viewType is not null)
+                {
+                    _resolvedTypes.Add(typeName, viewType);
+                }
+            }
+
+            return viewType;
+        }
         /// <summary>
         /// Get the view for the specified <paramref name="model"/>, optionally
         /// determined by where it is being displayed provided by <paramref name="target"/>
@@ -38,9 +60,11 @@ namespace MVx.Views.Wpf
         /// <param name="target">The location the view will be displayed</param>
         public FrameworkElement LocateForModel(object model, DependencyObject target)
         {
-            var viewTypeName = model.GetType().FullName.Replace("Model", string.Empty);
+            var viewModelTypeName = model.GetType().FullName;
 
-            var viewType = Type.GetType(viewTypeName, false);
+            var viewTypeName = ViewName.For(viewModelTypeName);
+
+            var viewType = ResolveViewType(viewTypeName);
 
             if (viewType != null)
             {
