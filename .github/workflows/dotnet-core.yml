@@ -75,6 +75,7 @@ jobs:
 
     - name: Publish to Nuget
       if: startsWith(github.ref, 'refs/heads/release')
-      run: |
-        nuget sources add -name "nuget" -Source https://api.nuget.org/v3/index.json -Username ibebbs -Password ${{ secrets.NUGET_API_KEY }}
-        nuget push ".\nupkg\*.nupkg" -Source "nuget"
+      run: nuget push ".\nupkg\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      #run: |
+      #  nuget sources add -name "nuget" -Source https://api.nuget.org/v3/index.json -Username ibebbs -Password ${{ secrets.NUGET_API_KEY }}
+      #  nuget push ".\nupkg\*.nupkg" -Source "nuget"
