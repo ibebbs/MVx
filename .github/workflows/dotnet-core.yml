@@ -31,14 +31,14 @@ jobs:
     - name: Build Observable
       run: dotnet build ./src/MVx.Observable/MVx.Observable.csproj --configuration Release --no-restore
     - name: Pack Observable
-      run: dotnet pack ./src/MVx.Observable/MVx.Observable.csproj -p:PackageVersion=5.0.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
+      run: dotnet pack ./src/MVx.Observable/MVx.Observable.csproj -p:PackageVersion=5.1.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
       
     - name: Install Monad dependencies
       run: dotnet restore ./src/MVx.Monads/MVx.Monads.csproj
     - name: Build Monad
       run: dotnet build ./src/MVx.Monads/MVx.Monads.csproj --configuration Release --no-restore
     - name: Pack Monad
-      run: dotnet pack ./src/MVx.Monads/MVx.Monads.csproj -p:PackageVersion=5.0.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
+      run: dotnet pack ./src/MVx.Monads/MVx.Monads.csproj -p:PackageVersion=5.1.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
 
     - name: Push to GitHub Packages
       run: nuget push "nupkg/*.nupkg" -Source "https://nuget.pkg.github.com/ibebbs/index.json" -ApiKey ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
     - name: Build Views.Wpf
       run: dotnet build ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj --configuration Release --no-restore
     - name: Pack Views.Wpf
-      run: dotnet pack ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj -p:PackageVersion=5.0.$Env:GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
+      run: dotnet pack ./src/MVx.Views.Wpf/MVx.Views.Wpf.csproj -p:PackageVersion=5.1.$Env:GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
 
     - name: Push to GitHub Packages
       run: |
