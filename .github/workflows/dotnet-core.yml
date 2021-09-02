@@ -26,11 +26,35 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.5
       with:
         nuget-version: latest
-
+    - name: Cache SonarCloud packages
+      uses: actions/cache@v1
+      with:
+        path: ~\sonar\cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+    - name: Cache SonarCloud scanner
+      id: cache-sonar-scanner
+      uses: actions/cache@v1
+      with:
+        path: .\.sonar\scanner
+        key: ${{ runner.os }}-sonar-scanner
+        restore-keys: ${{ runner.os }}-sonar-scanner
+    - name: Install SonarCloud scanner
+      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+      shell: pwsh
+      run: |
+        New-Item -Path .\.sonar\scanner -ItemType Directory
+        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
     - name: Install Observable dependencies
       run: dotnet restore ./src/MVx.Observable/MVx.Observable.csproj
     - name: Build Observable
-      run: dotnet build ./src/MVx.Observable/MVx.Observable.csproj --configuration Release --no-restore
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"ibebbs_MVx" /o:"ibebbs-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build ./src/MVx.Observable/MVx.Observable.csproj --configuration Release --no-restore
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     - name: Pack Observable
       run: dotnet pack ./src/MVx.Observable/MVx.Observable.csproj -p:PackageVersion=5.1.$GITHUB_RUN_NUMBER --configuration Release -o nupkg --no-build
       
